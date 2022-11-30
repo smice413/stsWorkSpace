@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1 th:text="${now}"></h1>
+<h1 th:text="${price}"></h1>
+<h1 th:text="${title}"></h1>
+<h1 th:text="${options}"></h1>
+
+<!--1.날짜 관련 : #dates -->
+<h2 th:text="${#dates.format(now, 'yyyy-MM-dd HH:mm:ss')}"></h2>
+
+<!--2.숫자 관련 : #numbers  -->
+<h2 th:text="${#numbers.formatInteger(price, 3, 'COMMA')}"></h2>
+
+<!--3.문자 관련 : #strings  -->
+<h1 th:text="${title}"></h1>
+
+<!-- replace()함수를 이용해서 s를 진하게 출력 -->
+<span th:utext="${#strings.replace(title,'s','<b>s</b>')}"></span>
+
+<!-- listSplit()함수를 이용해서 title변수의 값을 리스트로 처리하고 출력 -->
+<ul>
+	<li th:each="str:${#strings.listSplit(title,' ')}">[[${str}]]</li>
+</ul>
+
+</body>
+</html>

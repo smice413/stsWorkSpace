@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- javascript안에서 Thymeleaf 사용하기 -->
+<!-- script태그에  th:inline="javascript"를 추가하면 script안에서 Thymeleaf를 사용할 수 있다. -->
+<script th:inline="javascript">
+	var result = [[${result}]]; 	     // result = "SUCCESS" 할당됨
+	document.write(result);				 // SUCCESS  출력
+</script>
+
+<script>
+	var result = [[${result}]];          // result변수에 값이 할당 안됨
+	document.write(result);              // 아무것도 출력 안됨
+</script>
+
+</body>
+</html>

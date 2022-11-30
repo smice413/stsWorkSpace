@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- th:text : DTO 객체 출력   -->
+<h1 th:text="${member}">Thymeleaf Test page</h1>
+
+<!-- th:text : 문자열(HTML태그) 출력. 태그까지 출력됨   -->
+<div th:text='${"<h3>"+member.no+"</h3>"}'></div> 
+
+<!-- th:utext : 데이터 출력. 태그는 출력안되고 데이값만 출력됨  -->
+<div th:utext='${"<h3>"+member.no+"</h3>"}'></div> 
+<div th:utext='${"<h3>"+member.id+"</h3>"}'></div> 
+<div th:utext='${"<h3>"+member.pw+"</h3>"}'></div> 
+<div th:utext='${"<h3>"+member.name+"</h3>"}'></div> 
+<div th:utext='${"<h3>"+member.regdate+"</h3>"}'></div> 
+
+</body>
+</html>

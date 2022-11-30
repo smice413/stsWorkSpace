@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border="1" align="center" width="300">
+	<tr>
+		<td>ID</td>
+		<td>NAME</td>
+		<td>REGDATE</td>
+	</tr>
+	<tr th:each="member : ${list}">
+		<td th:text="${member.id}"></td>
+		<td th:text="${member.name}"></td>
+		<td th:text="${#dates.format(member.regdate,'yyyy-MM-dd HH:mm:ss')}"></td>
+	</tr>
+</table><br>
+
+<!-- 변수 정의 -->
+<!-- th:with="변수명='값' " -->
+<table border="1" align="center" width="300" th:with="target='u0001'">
+	<tr>
+		<td>ID</td>
+		<td>NAME</td>
+		<td>REGDATE</td>
+	</tr>
+	
+	<!-- member.id 값이  target이 회원만 삼항연산자를 이용해서 secret을 출력 -->
+	<tr th:each="member : ${list}">  
+		<td th:text="${member.id == target ? 'secret' : member.id}"></td>
+		<td th:text="${member.name}"></td>
+		<td th:text="${#dates.format(member.regdate,'yyyy-MM-dd HH:mm:ss')}"></td>
+	</tr>
+</table><br>
+
+<!-- if조건식 -->
+<!-- th:if ~ th:unless -->
+<table border="1" align="center" width="300" th:with="target='u0001'">
+	<tr>
+		<td>ID</td>
+		<td>NAME</td>
+		<td>REGDATE</td>
+	</tr>
+	
+	<!-- member.id값이 target(u0001)과 같으면 Modify를 출력 하고,
+	     member.id값이 target(u0001)과 같지 않으면 View를 출력 	 -->
+	<tr th:each="member : ${list}">
+		<td th:if="${member.id}">
+		    <a href="/modify" th:if="${member.id == target}">Modify</a>
+		    <p th:unless="${member.id == target}">View</p>
+		</td>
+		<td th:text="${member.name}"></td>
+		<td th:text="${#dates.format(member.regdate,'yyyy-MM-dd HH:mm:ss')}"></td>
+	</tr>
+</table><br>
+
+</body>
+</html>
