@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<!-- DTO클래스의 alias가 적용 안됨 DTO에서 어노테이션으로 alias를 만들었기 때문 -->  
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.example.demo.model.Board" alias="board"></typeAlias>
+	</typeAliases>	
+</configuration>
