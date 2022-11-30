@@ -1,0 +1,97 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>게시판 목록</title>
+    <link rel="stylesheet" href="./css/bbs.css" type="text/css">
+</head>
+
+<body>
+	<!-- 게시판 리스트 -->
+	<div id="bbslist_wrap">
+		<h2 class="bbslist_title">게시판 목록</h2>
+		<p th:text=" '글갯수:' +  ${listcount} "></p>
+
+		<table id="bbslist_t">
+			<tr align="center" valign="middle" bordercolor="#333333">
+				<td style="font-family: Tahoma; font-size: 11pt;" width="8%"
+					height="26">
+					<div align="center">번호</div>
+				</td>
+				<td style="font-family: Tahoma; font-size: 11pt;" width="47%">
+					<div align="center">제목</div>
+				</td>
+				<td style="font-family: Tahoma; font-size: 11pt;" width="14%">
+					<div align="center">작성자</div>
+				</td>
+				<td style="font-family: Tahoma; font-size: 11pt;" width="17%">
+					<div align="center">날짜</div>
+				</td>
+				<td style="font-family: Tahoma; font-size: 11pt;" width="14%">
+					<div align="center">조회수</div>
+				</td>
+			</tr>
+
+			<tr th:each="b, i : ${boardlist}"  th:with="num=${listcount-(page-1)*10}"
+			    align="center" valign="middle" bordercolor="#333333"
+				onmouseover="this.style.backgroundColor='F8F8F8'"
+				onmouseout="this.style.backgroundColor=''">
+				
+				<td th:with="num=${num - i.index}"  th:text="${num}"></td>				
+				
+				<td>
+					<div align="left">						
+						
+					<span th:if="${b.board_re_lev != 0}"> 					
+						<span th:each="k : ${#numbers.sequence(1, b.board_re_lev)}">
+							&nbsp;&nbsp;	
+						</span>			
+						<img src="./images/AnswerLine.gif">	
+					</span>					
+							
+					<a th:href="@{/board_cont(board_num=${b.board_num},page=${page},state='cont')}" th:text="${b.board_subject}"> 
+					</a>
+					
+					</div>
+				</td>
+
+				<td th:text="${b.board_name}"></td>
+				
+				<td th:text="${#dates.format(b.board_date, 'yyyy-MM-dd')}"></td>
+				<!-- <td th:text="${b.board_date}"></td> -->
+				
+				<td th:text="${b.board_readcount}"></td>
+			</tr>		
+						
+		</table>
+
+		<div id="bbslist_paging">			
+			<span th:if="${page <=1}" th:text="[이전]"></span>&nbsp;		
+			
+			<span th:if="${page>1}">
+				<a th:href="@{/board_list(page=${page-1})}" th:text="[이전]"></a>&nbsp;
+			</span>			
+			
+			<span th:each="a : ${#numbers.sequence(startpage, endpage)}">
+				<span th:if="${a == page }" th:text="${a}"></span>
+				<span th:if="${a != page }">
+					<a th:href="@{/board_list(page=${a})}" th:text="${a}"></a>&nbsp;
+				</span>
+			</span>							
+			
+			<span th:if="${page >= maxpage }" th:text="[다음]"></span>&nbsp;			
+			
+			<span th:if="${page < maxpage }">
+				<a th:href="@{/board_list(page=${page+1})}" th:text="[다음]"></a>&nbsp;
+			</span>		
+			
+		</div>
+		<div id="bbslist_w">
+			<input type="button" value="글쓰기" class="input_button"
+				onclick="location.href='board_write'">
+		</div>
+		
+	</div>
+</body>
+</html>
