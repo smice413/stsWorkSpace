@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 기본적으로 싱글톤 형태이기 때문에 같은 bean끼리는 공유가됨 -->
+	<bean id="md" class="sample16.MemberDaoImpl" />
+	<bean id="ms" class="sample16.MemberServiceImpl">
+		<property name="md" ref="md" />
+	</bean>
+
+</beans>
+

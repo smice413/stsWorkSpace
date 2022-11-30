@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- MessageBeanKr mb = new MessageBeanKr() -->
+	<bean id="mb" class="sample03.MessageBeanKr" name="a"></bean>
+	
+	<!--  Constructor DI -->
+	<!-- MessageBeanImpl mb = new MessageBeanImpl("도깨비", "안뇽") -->
+	<bean id="mb2" class="sample04.MessageBeanImpl">
+		<!-- 기본적으로 순서대로 입력하면 매개변수에 순서대로 할당됨. 순서대로 안썼다면 index="0"을 괄호안에 넣으면 첫번째 순서이다. -->
+		<!-- <constructor-arg value="도깨비" index="0"> --> 
+		<constructor-arg value="도깨비"> 
+			<!-- <value>박보검</value> -->
+		</constructor-arg>
+		<constructor-arg value="안뇽">
+			<!-- <value>Hello</value> -->
+		</constructor-arg>
+	</bean>
+	
+</beans>
